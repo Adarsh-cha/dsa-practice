@@ -124,3 +124,28 @@ class Solution {
         return root;
     }
 }
+
+// Morris traverse
+class Solution {
+    public TreeNode flatten(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+
+        TreeNode curr = root;
+        while (curr != null) {
+            if (curr.left != null) {
+                TreeNode prev = curr.left;
+                while (prev.right != null) {
+                    prev = prev.right;
+                }
+
+                prev.right = curr.right;
+                curr.right = curr.left;
+                curr.left = null;
+            }
+            curr = curr.right;
+        }
+        return root;
+    }
+}
